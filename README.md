@@ -1,29 +1,26 @@
-# README #
+# Postman Weather Collection #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project is for testing Weather API with postman.
 
-### What is this repository for? ###
+* **Tool** : Postman
+* **Test ScriptLanguage** : JavaScript
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### How to setup project ###
 
-### How do I get set up? ###
+* Download and install [Postman](https://www.postman.com/downloads/)
+* Download and install [Git](https://git-scm.com/downloads)
+* Open command prompt and enter command **git clone https://stephenshinde12@bitbucket.org/stephenshinde12/postmanweathercollection.git**
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
-### Contribution guidelines ###
+### How to run project ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Open **Postman** and Import **Weather.postman_collection.json**
+* Click on collection name **Weather** and click on Run button
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### Project Structure ###
+* Method - Get
+* Endpoint (By CityName) - {{url}}/data/2.5/forecast?q=New York&appid={{appId}}&units=metric
+* url - https://api.openweathermap.org
+* appId - 10596cea5f4d17dc9dde106c6f3718e8
+* url and appId set in collection variables
+* Test is written in Tests section.
