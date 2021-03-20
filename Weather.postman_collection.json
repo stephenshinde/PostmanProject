@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "cc11e050-406e-46fd-ab79-9e9527d22b5a",
+		"name": "Weather",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "By CityName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"//Function to get tomorrows date\r",
+							"function getTomorrowDats() {\r",
+							"var date = new Date();\r",
+							"var dd = date.getDate()+1\r",
+							"var mm = date.getMonth() +1 \r",
+							"var yyyy = date.getFullYear()\r",
+							"\r",
+							"    if(mm < 10){\r",
+							"    mm = '0' + mm\r",
+							"    }\r",
+							"\r",
+							"    if(dd < 10){\r",
+							"    dd = '0' + dd\r",
+							"    }\r",
+							"        var tomorrowDate = yyyy + '-' + mm + '-' +dd\r",
+							"\r",
+							"    return tomorrowDate;\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Verify response contains New York in City Name\",() => {\r",
+							"    pm.expect(response.city.name).to.eql(\"New York\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify max temprature should below 10 degree Celsius\" , () =>{\r",
+							"\r",
+							"    for(var i = 0 ; i< response.list.length ; i++)\r",
+							"    {\r",
+							"       //get date from the response\r",
+							"        var date = response.list[i][\"dt_txt\"]\r",
+							"\r",
+							"        // modify the response date in yyyy-mm-dd format and print it.\r",
+							"        var actualDate = date.substr(0,10)\r",
+							"        console.log(\"Response Date is : \"+actualDate)\r",
+							"    \r",
+							"        \r",
+							"        /* if response date is equal with tomorrow date\r",
+							"            then verify tomorrow's max temperature should below 10\r",
+							"            degree celcius\r",
+							"        */\r",
+							"        if(actualDate== getTomorrowDats())\r",
+							"        {\r",
+							"            console.log(\"Tomorrow Max Temperature is : \" +response.list[i].main[\"temp_max\"])\r",
+							"            pm.expect(response.list[i].main[\"temp_max\"]).is.lessThan(10)\r",
+							"            \r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/data/2.5/forecast?q=New York&appid={{appId}}&units=metric",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"forecast"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "New York"
+						},
+						{
+							"key": "appid",
+							"value": "{{appId}}"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api.openweathermap.org"
+		},
+		{
+			"key": "appId",
+			"value": "10596cea5f4d17dc9dde106c6f3718e8"
+		}
+	]
+}
